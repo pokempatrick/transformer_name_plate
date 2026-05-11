@@ -47,4 +47,5 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('api/auth/', include('authentification.urls')),
+    path('api/', include('read_name_plate.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

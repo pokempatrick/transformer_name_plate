@@ -13,7 +13,7 @@ import uuid
 from django.contrib.auth.hashers import make_password
 from datetime import date, datetime, timedelta
 from helpers.validator import validate_contact, validate_file_size
-from helpers.constant import REGION_TYPE, ROLES
+from helpers.constant import ROLES
 from django.core.validators import FileExtensionValidator
 
 from authentification.validators import validate_region
