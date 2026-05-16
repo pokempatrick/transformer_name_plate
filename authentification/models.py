@@ -16,8 +16,6 @@ from helpers.validator import validate_contact, validate_file_size
 from helpers.constant import ROLES
 from django.core.validators import FileExtensionValidator
 
-from authentification.validators import validate_region
-
 
 class MyUserManager(UserManager):
     def _create_user(self, username, email, password, **extra_fields):
@@ -72,9 +70,6 @@ class User(TrakingModel, AbstractBaseUser, PermissionsMixin):
         filename = "%s.%s" % (uuid.uuid4(), ext)
         return os.path.join('documents/', filename)
 
-    def region_default():
-        return ["DRD"]
-
     username_validator = UnicodeUsernameValidator()
 
     username = models.CharField(
@@ -96,9 +91,6 @@ class User(TrakingModel, AbstractBaseUser, PermissionsMixin):
     role_name = models.CharField(
         _("role name"), max_length=150, choices=ROLES, default="ROLE_ANONYME", blank=False)
     email = models.EmailField(_("email address"), blank=False, unique=True)
-    region = models.JSONField(
-        max_length=10, default=region_default, validators=[validate_region,
-                                                           ])
 
     added_by = models.CharField(
         max_length=150, blank=True)

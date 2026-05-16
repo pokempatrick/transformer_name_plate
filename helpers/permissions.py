@@ -64,7 +64,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         return request.user.role_name in constant.ROLE_OWNER_HERITED
 
 
-class IsTeamMemberOrRO(permissions.BasePermission):
+class IsTeamMember(permissions.BasePermission):
     message = "Only team members can perform this action"
 
     def has_permission(self, request, view):
@@ -88,30 +88,6 @@ class IsUserOwner(permissions.BasePermission):
         return request.user == obj
 
 
-class IsRejectedStatut(permissions.BasePermission):
-    message = "The statut must be rejected."
-
-    def has_object_permission(self, request, view, obj):
-        """
-            Return `True` if permission is granted, `False` otherwise.
-        """
-        if (request.method in permissions.SAFE_METHODS):
-            return True
-        return obj.statut == "REJECTED"
-
-
-class IsValidationStatut(permissions.BasePermission):
-    message = "The statut must be validation."
-
-    def has_object_permission(self, request, view, obj):
-        """
-            Return `True` if permission is granted, `False` otherwise.
-        """
-        if (request.method in permissions.SAFE_METHODS):
-            return True
-        return obj.statut == "VALIDATION"
-
-
 class IsNew(permissions.BasePermission):
     message = "You can't change it after " + \
         f'{os.environ.get('DELAY_TIME')}' + "hour."
@@ -123,75 +99,3 @@ class IsNew(permissions.BasePermission):
         if (request.method in permissions.SAFE_METHODS):
             return True
         return hour_diff(obj.created_at, timezone.now()) < int(os.environ.get('DELAY_TIME'))
-
-
-class IsCreatorOrManager(permissions.BasePermission):
-    message = "Only the creator can perform this action"
-
-    def has_object_permission(self, request, view, obj):
-        """
-            Return `True` if permission is granted, `False` otherwise.
-        """
-        if (request.method in permissions.SAFE_METHODS):
-            return True
-        return request.user == obj.added_by or request.user.role_name in constant.ROLE_OWNER_HERITED
-
-
-class IsUserOwnerObject(permissions.BasePermission):
-    message = "Only the creator can perform this action"
-
-    def has_object_permission(self, request, view, obj):
-        """
-            Return `True` if permission is granted, `False` otherwise.
-        """
-        if (request.method in permissions.SAFE_METHODS):
-            return True
-        return request.user == obj.added_by
-
-
-class IsNewOrRejectedStatut(permissions.BasePermission):
-    message = "Only the owner can perform this action."
-
-    def has_object_permission(self, request, view, obj):
-        """
-            Return `True` if permission is granted, `False` otherwise.
-        """
-        if (request.method in permissions.SAFE_METHODS):
-            return True
-        return obj.statut in ["REJECTED", "NEW"]
-
-
-class HasSupervisorRole(permissions.BasePermission):
-    message = "Only supervisors can perform this action"
-
-    def has_permission(self, request, view):
-        """
-            Return `True` if permission is granted, `False` otherwise.
-        """
-        if (request.method in permissions.SAFE_METHODS):
-            return True
-        return request.user.role_name in constant.ROLE_SUPERVISOR
-
-
-class HasStoreKeeperRole(permissions.BasePermission):
-    message = "Only store keepers can perform this action"
-
-    def has_permission(self, request, view):
-        """
-            Return `True` if permission is granted, `False` otherwise.
-        """
-        if (request.method in permissions.SAFE_METHODS):
-            return True
-        return request.user.role_name == "ROLE_STORE_KEEPER"
-
-
-class HasMaintainerRole(permissions.BasePermission):
-    message = "Only store keepers can perform this action"
-
-    def has_permission(self, request, view):
-        """
-            Return `True` if permission is granted, `False` otherwise.
-        """
-        if (request.method in permissions.SAFE_METHODS):
-            return True
-        return request.user.role_name == "ROLE_MAINTAINER"

@@ -11,12 +11,12 @@ from pathlib import Path
 import os
 
 from read_name_plate.utils import read_name_plate
+from helpers.permissions import IsTeamMember
 # Create your views here.
 
 
 class ReadNamePlateAPIView(GenericAPIView):
-    permission_classes = ()
-    authentication_classes = ()
+    permission_classes = (permissions.IsAuthenticated, IsTeamMember)
 
     def post(self, request):
         if request.FILES.get('image'):

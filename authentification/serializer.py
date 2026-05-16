@@ -34,7 +34,7 @@ class UserSerialiser(serializers.ModelSerializer):
         model = User
         fields = ("id", "email", "username", "last_name", "first_name", "image", "first_contact",
                   "second_contact", "created_at", "updated_at", "role_name", "added_by",
-                  "updated_by", "limited_access_date", "is_active", "region")
+                  "updated_by", "limited_access_date", "is_active")
         read_only_fields = ['created_at',
                             'updated_at', "added_by", "updated_by", "limited_access_date", "is_active"]
         validators = [

@@ -2,10 +2,7 @@ ROLES = [
     ("ROLE_SUPER_ADMIN", "super_admin"),
     ("ROLE_ADMIN", "admin"),
     ("ROLE_MANAGER", "Manager"),
-    ("ROLE_SUPERVISOR", "Superviseur"),
     ("ROLE_TECHNICIEN", "Technicien"),
-    ("ROLE_STORE_KEEPER", "Magasinier"),
-    ("ROLE_MAINTAINER", "Maintenancier"),
     ("ROLE_ANONYME", "Anonyme"),
 ]
 
@@ -14,34 +11,12 @@ ROLE_ADMIN_HERITED = ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"]
 
 ROLE_OWNER_HERITED = ["ROLE_SUPER_ADMIN", "ROLE_ADMIN", "ROLE_MANAGER"]
 
-ROLE_MANAGER = ["ROLE_MANAGER", "ROLE_SUPERVISOR",
-                "ROLE_TECHNICIEN", "ROLE_STORE_KEEPER", 'ROLE_MAINTAINER']
+ROLE_MANAGER = ["ROLE_MANAGER",  "ROLE_ADMIN",
+                "ROLE_TECHNICIEN"]
 
 ROLE_SUPERVISOR = ["ROLE_MANAGER", "ROLE_SUPERVISOR"]
 
 
-EDITABLE_STATUT = ["NEW", "REJECTED"]
-
-VALIDATION_STATUT = [
-    ("VALIDATION", "Validation"),
-    ("REJECTED", "Rejeté"),
-    ("APPROVED", "Validé"),
-]
-
 DATE_FORMAT = "%Y-%m-%d"
 
 NUMBER_MAX_ACCOUNT = 5
-
-REGION_TYPE = [
-    ("DRD", "DRD"),  ("DRY", "DRY"), ("DRONO", "DRONO"), ("DRSANO", "DRSANO"),
-    ("DRNEA", "DRNEA"), ("DRSUM", "DRSUM"), ("DRE", "DRE"), ("DRSOM", "DRSOM"),
-    ("DRC", "DRC"),
-]
-
-ROLE_OPERATIONAL = ["ROLE_SUPERVISOR", "ROLE_TECHNICIEN", "ROLE_STORE_KEEPER"]
-
-MOVEMENT_STATUT_TYPE = [
-    ("VALIDATION", "VALIDATION"),
-    ("REJECTED", "REJECTED"),
-    ("APPROVED", "APPROVED")
-]
