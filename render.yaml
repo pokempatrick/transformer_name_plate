@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: drf-api
+    runtime: image
+    repo: https://render.com/read_name_plate_app
+    plan: free
+    dockerfilePath: ./Dockerfile
